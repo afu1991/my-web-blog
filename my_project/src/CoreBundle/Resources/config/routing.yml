@@ -4,7 +4,8 @@ core_home:
 
 core_homepage:
     path:     /
-    defaults: { _controller: CoreBundle:Default:index }
+    defaults: { _controller: CoreBundle:Post:index }
+    methods: GET
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

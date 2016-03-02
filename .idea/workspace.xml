@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01215148-485a-4386-a35d-ac830905902c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my_project/src/CoreBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/my_project/src/CoreBundle/Resources/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/my_project/app/config/security.yml" afterPath="$PROJECT_DIR$/my_project/app/config/security.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Affiliation.iws" />
     <ignored path=".idea/workspace.xml" />

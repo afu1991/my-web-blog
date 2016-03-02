@@ -1,0 +1,88 @@
+{%  extends 'CoreBundle::layout.html.twig' %}
+
+{% block body %}
+
+
+
+
+    <div class="col-sm-8 bootstrap snippet">
+        <div class="row ">
+
+                <div class="col-md-12 col-sm-12 col-xs-12 section-blog">
+                    <section class="widget">
+                        <div class="widget-controls">
+                            {% if is_granted('ROLE_REPORTER') %}
+                                <a href="{{ path('home_edit', { 'id': post.id }) }}"><i class="fa fa-refresh"></i></a>
+                                <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                            {% endif %}
+                        </div>
+                        <div class="widget-body">
+                            <div class="post-user mt-n-xs">
+                            <span class="thumb pull-left mr">
+                                <img class="img-circle" src="http://bootdey.com/img/Content/user_2.jpg" alt="...">
+                            </span>
+                                <h5 class="mb-xs mt-xs"> {{ post.user.username }} <span class="fw-semi-bold">@{{ post.user.username }}</span></h5>
+                                <p class="fs-mini text-muted">{{ post.createdAt| date('d M Y') }} <i class="fa fa-map-marker"></i>  &nbsp; Paris</p>
+                            </div>
+                            <div class="widget-middle-overflow windget-padding-md clearfix {{ random(['bg-danger', 'bg-info', 'bg-primary']) }}   text-white">
+                                <h3 class="mt-lg mb-lg">{{ post.title }}</h3>
+                                <ul class="tags text-white pull-right">
+                                    <li><a href="{{ path('home_show', { 'id': post.id }) }}">READ MORE</a></li>
+                                </ul>
+                            </div>
+                            <p class="text-light fs-mini mt-sm">{{ post.content }} </p>
+                        </div>
+                        <footer class="bg-body-light">
+                            <ul class="post-links">
+
+                                <li><a href="#"><span class="text-danger"><i class="fa fa-heart"></i> J'aime</span></a></li>
+                                <li><a href="#">Commentaires</a></li>
+                            </ul>
+                        </footer>
+                    </section>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="blog-comment">
+
+                                {% if is_granted('ROLE_LECTEUR') %}
+
+                                    <form action="{{ path('home_comment_new', {'post_id': post.id }) }}" method="post">
+                                    <input name="comment" type="text" class="col-md-8" placeholder="Commentaire" required="required">
+                                    <button class="btn btn-info btn-valider-home" >valider</button>
+                                </form>
+                                {% endif %}
+                                <h3 class="text-success">Commentaire</h3>
+                                <hr/>
+                                {% for flash_message in app.session.flashbag.get('notice') %}
+                                    <div class="alert alert-info">
+                                        {{ flash_message }}
+                                    </div>
+                                {% endfor %}
+                                <ul class="comments">
+                                    {% for c in post.comments | reverse %}
+                                        <li class="clearfix">
+                                            <img src="http://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+                                            <div class="post-comments">
+                                                <p class="meta">{{ c.createdAt| date('d M Y') }} <a href="#">{{ c.user.username }}</a>  <i class="pull-right"><a href="{{ path('home_reported', {'post_id': post.id, 'comment_id':c.id, 'bool': true }) }}"><small>Signaler</small></a></i></p>
+                                                <p>
+                                                    {{ c.comment }}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

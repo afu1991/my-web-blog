@@ -1,0 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="page-header">
+
+</div>
+<div class="container bootstrap snippet">
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register lc-block col-md-4 col-md-offset-4 toggled'}}) }}
+    <div class="lcb-float"><i class="fa fa-users"></i></div>
+
+    <div class="form-group">
+        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'form.username'|trans } }) }}
+        {{ form_errors(form.username) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'form.email'|trans } }) }}
+        {{ form_errors(form.email) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'form.password'|trans } }) }}
+        {{ form_errors(form.plainPassword.first) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'form.password_confirmation'|trans } }) }}
+        {{ form_errors(form.plainPassword.second) }}
+    </div>
+
+    {{ form_rest(form) }}
+
+
+    <div class="form-group">
+        <button class="btn btn-info col-md-12" type="submit" id="_submit" name="_submit">{{ 'registration.submit'|trans }}</button>
+    </div>
+    <a href="{{ path('fos_user_security_login') }}" style="margin-top: 5px">Se connecter</a>
+    {{ form_end(form) }}
+</div>

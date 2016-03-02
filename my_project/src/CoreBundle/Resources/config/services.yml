@@ -1,0 +1,25 @@
+services:
+#    core.example:
+#        class: CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+
+
+ core.redirection.after_login_redirection:
+    class: CoreBundle\Redirection\AfterLoginRedirection
+    arguments: [ "@router" ]
+
+ core.manager.post_manager:
+    class: CoreBundle\Manager\PostManager
+    arguments: [ "@doctrine.orm.default_entity_manager" ]
+
+ core.twig_extension.core_extension:
+    class: CoreBundle\Twig\Extension\CoreExtension
+    calls:
+        - [ initRuntime, [ "@twig" ] ]
+    tags:
+        - { name: twig.extension }
+
+ core.manager.comment_manager:
+    class: CoreBundle\Manager\CommentManager
+    arguments: [ "@doctrine.orm.default_entity_manager" ]

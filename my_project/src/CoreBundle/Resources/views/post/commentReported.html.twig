@@ -1,0 +1,41 @@
+{% extends 'CoreBundle::layout.html.twig' %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div>
+
+        </div>
+        {% for flash_message in app.session.flashbag.get('notice') %}
+            <div class="alert alert-success">
+                <strong>Success ! </strong> {{ flash_message }}
+            </div>
+        {% endfor %}
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Titre post</th>
+                <th>Commentaire signalé</th>
+                <th>Utilisateur</th>
+                <th>Voir</th>
+                <th>Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.post.title }}</td>
+                    <td>{{ comment.comment }}</td>
+                    <td>{{ comment.user.username }}</td>
+                    <td> <a class="btn btn-info" href="{{ path('home_show', {'id': comment.post.id }) }}"><i class="fa fa-eye fa-2x "></i></a> </td>
+                    <td> <a class="btn btn-danger" href="{{ path('delete_comment', {'id': comment.id}) }}"><i class="fa fa-times fa-2x"></i></a> </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'CoreBundle::layout.html.twig' %}
+
+{% block body %}
+
+    <div class="col-sm-8 bootstrap snippet">
+        <div class="row ">
+            {% for post in posts | reverse %}
+                <div class="col-md-6 col-sm-6 col-xs-12 section-blog">
+                    <section class="widget">
+                        <div class="widget-controls">
+
+                            {% if is_granted('ROLE_REPORTER') %}
+                            <a href="{{ path('home_edit', { 'id': post.id }) }}"><i class="fa fa-refresh"></i></a>
+
+                            <a href="{{ path('home_delete', {'id': post.id }) }}" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                            {% endif %}
+
+                        </div>
+                        <div class="widget-body">
+                            <div class="post-user mt-n-xs">
+                            <span class="thumb pull-left mr">
+                                <img class="img-circle" src="http://bootdey.com/img/Content/user_2.jpg" alt="...">
+                            </span>
+                                <h5 class="mb-xs mt-xs"> {{ post.user.username }} <span class="fw-semi-bold">@{{ post.user.username }}</span></h5>
+                                <p class="fs-mini text-muted">{{ post.createdAt| date('d M Y') }} <i class="fa fa-map-marker"></i>  &nbsp; Paris</p>
+                            </div>
+                            <div class="widget-middle-overflow windget-padding-md clearfix text-white"
+                                 style="background: {{ random(['#F6CD61', '#0E9AA7', '#FE8A71', '#66CC99', '#112233', '#44BBFF', '#6C1827']) }}">
+
+                                <h3 class="mt-lg mb-lg">{{ post.title }}</h3>
+                                <ul class="tags text-white pull-right">
+                                    <li><a href="{{ path('home_show', { 'id': post.id }) }}">READ MORE</a></li>
+                                </ul>
+                            </div>
+                            <p class="text-light fs-mini mt-sm">{{  limitstr(post.content, 150) }} </p>
+                        </div>
+                        <footer class="bg-body-light">
+                            <ul class="post-links">
+
+                                <li><a href="#"><span class="text-danger"><i class="fa fa-heart"></i> J'aime</span></a></li>
+                                <li>
+                                    <a href="{{ path('home_show', { 'id': post.id }) }}">
+                                        {{ post.comments | count }}
+                                        {% if post.comments | count > 1 %}
+                                            Commentaires
+                                        {% else %}
+                                            Commentaire
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </footer>
+                    </section>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

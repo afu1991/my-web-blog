@@ -1,0 +1,36 @@
+core_home:
+    resource: "@CoreBundle/Resources/config/routing/post.yml"
+    prefix:   /home
+
+core_homepage:
+    path:     /
+    defaults: { _controller: CoreBundle:Default:index }
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+admin_statistique:
+    path:     admin/statistique
+    defaults: { _controller: CoreBundle:Statistique:index }
+
+home_comment_new:
+    path:     /comment/{post_id}
+    defaults: { _controller: "CoreBundle:Comment:new" }
+    requirements:
+            _method:  POST
+            blog_id: \d+
+
+home_reported:
+    path:    /home/{post_id}/comment/{comment_id}/{bool}
+    defaults: { _controller: "CoreBundle:Comment:reported" }
+    methods: GET
+
+home_get_comment_reported:
+    path: /commentaires/report
+    defaults: { _controller: "CoreBundle:Comment:CommentReported" }
+    methods: GET
+
+delete_comment:
+    path: /commentaires/{id}/delete
+    defaults: { _controller:"CoreBundle:Comment:delete"}
+    methods: GET
